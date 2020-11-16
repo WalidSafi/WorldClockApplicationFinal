@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">WorldClockApplication</string>
+
+    <string-array name="regions_array">
+        <item>Africa</item>
+        <item>America</item>
+        <item>Asia</item>
+        <item>Australia</item>
+        <item>Europe</item>
+    </string-array>
+
+</resources>
