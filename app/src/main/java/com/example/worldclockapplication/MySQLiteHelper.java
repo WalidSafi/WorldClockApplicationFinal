@@ -118,11 +118,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, null, null);
 
     }
-    public boolean deleteClock(String name)
-    {
+    public void deleteClock(String cityName) {
         SQLiteDatabase db = this.getWritableDatabase();
-        System.out.println(name);
-        return db.delete(TABLE_NAME, COL_3 + "=?", new String[]{name}) > 0;
+        System.out.println(cityName);
+        db.delete(TABLE_NAME, COL_3 + "=?", new String[]{cityName});
     }
 
     public ArrayList<String> getEditClockRecords(){
