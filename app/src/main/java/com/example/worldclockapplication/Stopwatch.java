@@ -35,7 +35,7 @@ public class Stopwatch extends AppCompatActivity {
                 long t = SystemClock.elapsedRealtime() - chronometer.getBase();
 
                 if(t >= 10000) {
-                    System.out.println("One second has passed");
+                    System.out.println("Ten seconds has passed");
                 } else {
                     System.out.println("Not working");
                 }
@@ -63,6 +63,7 @@ public class Stopwatch extends AppCompatActivity {
     }
 
     public void resetWatch(View v){
+        watch.stop();
         watch.setBase(SystemClock.elapsedRealtime());
         pausedtime = 0;
     }

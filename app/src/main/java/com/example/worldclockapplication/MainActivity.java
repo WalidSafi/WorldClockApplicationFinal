@@ -19,30 +19,20 @@ public class MainActivity extends AppCompatActivity {
     ListView list;
     MySQLiteHelper mydb;
 
-    private static final String TABLE_NAME = "Clocks";
-    private static final String COL_1 = "id";
-    private static final String COL_2 = "regions";
-    private static final String COL_3 = "cityname";
-    private static final String COL_4 = "timezone";
-    private static final String COL_5 = "localtime";
-    private static final String COL_6 = "utctime";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mydb = new MySQLiteHelper(this,null,null,1);
 
-        //mydb.deleteTitle("America/Toronto");
-
         Intent intent = getIntent();
 
         list = (ListView) findViewById(R.id.testlist);
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        arrayList = mydb.getClockRecords();
+        ArrayList<String> clockList = new ArrayList<>();
+        clockList = mydb.getClockRecords();
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, clockList);
         list.setAdapter(arrayAdapter);
 
     }

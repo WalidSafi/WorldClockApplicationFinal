@@ -111,7 +111,11 @@ public class addWorldClock extends AppCompatActivity {
 
                 return buffer.toString();
 
-            } catch (IOException e) {
+            }  catch (MalformedURLException e){
+                e.printStackTrace();
+                return null;
+            }
+            catch (IOException e) {
 
                 e.printStackTrace();
             }
@@ -123,29 +127,35 @@ public class addWorldClock extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            String jsonString = result;
+            if (result == null) {
+                System.out.println("Null Will exit");
+                Toast.makeText(addWorldClock.this, "This city is not supported in the API" , Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                String jsonString = result;
 
-            try {
+                try {
 
-                JSONObject jsonObject = new JSONObject(jsonString);
+                    JSONObject jsonObject = new JSONObject(jsonString);
 
-                String insertCity = jsonObject.getString("timezone");
-                String insertZone = jsonObject.getString("abbreviation");
-                String insertLocal = jsonObject.getString("datetime");
-                String insertUTC = jsonObject.getString("utc_datetime");
+                    String insertCity = jsonObject.getString("timezone");
+                    String insertZone = jsonObject.getString("abbreviation");
+                    String insertLocal = jsonObject.getString("datetime");
+                    String insertUTC = jsonObject.getString("utc_datetime");
 
-                mydb.insertData(region, insertCity, insertZone, insertLocal, insertUTC);
+                    mydb.insertData(region, insertCity, insertZone, insertLocal, insertUTC);
 
-                System.out.println(insertZone);
+                    System.out.println(insertZone);
 
 
-                Toast.makeText(addWorldClock.this, CityName + " Has been added to the Database", Toast.LENGTH_SHORT).show();
-                edtCityName.setText("");
+                    Toast.makeText(addWorldClock.this, CityName + " Has been added to the Database", Toast.LENGTH_SHORT).show();
+                    edtCityName.setText("");
 
-            } catch(JSONException e) {
-                e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
-
         }
     }
 }
